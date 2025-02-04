@@ -1,0 +1,17 @@
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_VERSION=latest
+    tty: true
+    volumes:
+      - ./:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    ports:
+      - 5173:5173
+    command: /bin/bash -c "yarn install && yarn run dev"
+
+volumes:
+  node_modules:
